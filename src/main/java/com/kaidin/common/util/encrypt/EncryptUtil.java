@@ -1,4 +1,8 @@
-package com.kaidin.common.util;
+/**
+ * Kaidin.com Inc.
+ * Copyright (c) 2008-2018 All Rights Reserved.
+ */
+package com.kaidin.common.util.encrypt;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,7 +16,7 @@ import java.security.NoSuchAlgorithmException;
  * @author	kaidin@foxmail.com
  * @date	2015-6-23下午01:51:48
  */
-public class EncryptUtil {
+public abstract class EncryptUtil {
 	/**
 	 * 目前支持的散列值的类型
 	 * @version	1.0
@@ -20,37 +24,32 @@ public class EncryptUtil {
 	 * @date	2015-6-23下午01:51:48
 	 */
 	public enum EncryptType {
-		MD5,
-		SHA1, SHA256, SHA384, SHA512;
+		MD5, SHA1, SHA256, SHA384, SHA512;
 	}
-	
-	
+
 	/**
 	 *  把字节数组转成16进位制数
 	 * @param byteArray
 	 * @return
 	 */
 	private static String bytesToHex(byte[] byteArray) {
-		String result = null;
-		
-		// 把数组每一字节换成16进制连成md5字符串
-		if (null != byteArray) {
-			StringBuffer strBuffer = new StringBuffer(2 * byteArray.length);
-			for (int digital: byteArray) {
-				if (digital < 0) {
-					digital += 256;
-				}
-				if (digital < 16) {
-					strBuffer.append("0");
-				}
-				strBuffer.append(Integer.toHexString(digital));
-			}
-			result = strBuffer.toString();
+		if (null == byteArray) {
+			return null;
 		}
-		
-		return result;
+		// 把数组每一字节换成16进制连成md5字符串
+		StringBuffer strBuffer = new StringBuffer(2 * byteArray.length);
+		for (int digital : byteArray) {
+			if (digital < 0) {
+				digital += 256;
+			}
+			if (digital < 16) {
+				strBuffer.append("0");
+			}
+			strBuffer.append(Integer.toHexString(digital));
+		}
+		return strBuffer.toString();
 	}
-	
+
 	private static MessageDigest getMessageDigest(EncryptType tncryptType) {
 		try {
 			return MessageDigest.getInstance(String.valueOf(tncryptType));
@@ -58,7 +57,7 @@ public class EncryptUtil {
 			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
-	
+
 	/**
 	 * 计算content的散列值，散列值的类型为tncryptType
 	 * @param content
@@ -66,40 +65,35 @@ public class EncryptUtil {
 	 * @return
 	 */
 	public static String encrypt(byte[] content, EncryptType tncryptType) {
-		String result = null;
-		
-		if (null != content) {
-			MessageDigest msgDigest = getMessageDigest(tncryptType);
-			msgDigest.update(content);
-			result = bytesToHex(msgDigest.digest());
+		if (null == content) {
+			return null;
 		}
-
-		return result;
+		MessageDigest msgDigest = getMessageDigest(tncryptType);
+		msgDigest.update(content);
+		return bytesToHex(msgDigest.digest());
 	}
+
 	/**
 	 * 计算content的散列值，散列值的类型为tncryptType
 	 * @param content
 	 * @param tncryptType
 	 * @return
 	 */
-	public static String encrypt(String content,  EncryptType tncryptType) {
-		String result = null;
-		
-		if (null != content) {
-			result = encrypt(content.getBytes(), tncryptType);
+	public static String encrypt(String content, EncryptType tncryptType) {
+		if (null == content) {
+			return null;
 		}
-		
-		return result;
+
+		return encrypt(content.getBytes(), tncryptType);
 	}
+
 	/**
 	 * 计算文件file的散列值，散列值的类型为tncryptType
-	 * @param content
+	 * @param file
 	 * @param tncryptType
 	 * @return
 	 */
 	public static String encrypt(File file, EncryptType tncryptType) throws IOException {
-		String result = null;
-
 		try (FileInputStream fileInputStream = new FileInputStream(file)) {
 			byte[] buffer = new byte[8192];
 			int length;
@@ -107,22 +101,19 @@ public class EncryptUtil {
 			while (-1 != (length = fileInputStream.read(buffer))) {
 				msgDigest.update(buffer, 0, length);
 			}
-			result = bytesToHex(msgDigest.digest());
-		} catch (IOException e) {
-			throw e;
+			return bytesToHex(msgDigest.digest());
 		}
-
-		return result;
 	}
-	
+
 	/**
 	 * 计算指定字符串的md5值
-	 * @param passwd
+	 * @param content
 	 * @return
 	 */
 	public static String md5(String content) {
 		return encrypt(content, EncryptType.MD5);
 	}
+
 	/**
 	 * 计算指定字符串的md5值
 	 * @param file
@@ -132,15 +123,16 @@ public class EncryptUtil {
 	public static String md5(File file) throws IOException {
 		return encrypt(file, EncryptType.MD5);
 	}
-	
+
 	/**
 	 * 计算指定字符串的sha1值
-	 * @param passwd
+	 * @param content
 	 * @return
 	 */
 	public static String sha1(String content) {
 		return encrypt(content, EncryptType.SHA1);
 	}
+
 	/**
 	 * 计算指定字符串的sha1值
 	 * @param file

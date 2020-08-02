@@ -1,6 +1,11 @@
-package com.kaidin.common.util;
+/**
+ * Kaidin.com Inc.
+ * Copyright (c) 2008-2018 All Rights Reserved.
+ */
+package com.kaidin.common.util.regex;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
