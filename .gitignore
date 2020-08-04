@@ -1,9 +1,11 @@
-
+# Default ignored files
 .gitignore
+.idea/*
+
+/src/test/resources/image/output/*
 
 /target/classes/*
 /target/test-classes/*
 /target/surefire-reports/*
 /target/maven-archiver/*
 /target/*.jar
-
