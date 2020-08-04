@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import com.kaidin.common.constant.ConstType;
+import com.kaidin.common.util.constant.ConstType;
 import com.kaidin.common.util.DataTypeUtil;
 import com.kaidin.common.util.FileUtil;
 

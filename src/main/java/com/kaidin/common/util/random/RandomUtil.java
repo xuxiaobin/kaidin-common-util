@@ -6,7 +6,7 @@ package com.kaidin.common.util.random;
 
 import java.util.Random;
 
-import com.kaidin.common.constant.ConstType;
+import com.kaidin.common.util.constant.ConstType;
 
 /**
  * 随机函数工具

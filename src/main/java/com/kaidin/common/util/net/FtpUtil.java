@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
-import com.kaidin.common.constant.ConstType;
+import com.kaidin.common.util.constant.ConstType;
 import com.kaidin.common.util.collection.CollectionUtil;
 
 /**

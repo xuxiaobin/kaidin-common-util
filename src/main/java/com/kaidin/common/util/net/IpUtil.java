@@ -10,7 +10,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
 
-import com.kaidin.common.constant.ConstType;
+import com.kaidin.common.util.constant.ConstType;
 import com.kaidin.common.util.StringUtil;
 import com.kaidin.common.util.regex.RegexUtil;
 

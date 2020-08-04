@@ -15,7 +15,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-import com.kaidin.common.constant.ConstType;
+import com.kaidin.common.util.constant.ConstType;
 
 /**
  * 图片验证码生成

@@ -18,7 +18,7 @@ import java.util.Set;
 import com.kaidin.common.util.collection.CollectionUtil;
 import org.apache.commons.beanutils.PropertyUtils;
 
-import com.kaidin.common.constant.ConstType;
+import com.kaidin.common.util.constant.ConstType;
 
 /**
  * 读取properties文件工具

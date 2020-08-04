@@ -12,8 +12,7 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import com.kaidin.common.constant.ConstType;
-import com.kaidin.common.util.net.IpUtil;
+import com.kaidin.common.util.constant.ConstType;
 
 public class IpUtilTest {
 	public static void main(String[] args) {

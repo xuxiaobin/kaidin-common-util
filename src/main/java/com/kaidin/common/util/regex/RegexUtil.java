@@ -7,7 +7,7 @@ package com.kaidin.common.util.regex;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.kaidin.common.constant.ConstType;
+import com.kaidin.common.util.constant.ConstType;
 import com.kaidin.common.util.StringUtil;
 
 /**
