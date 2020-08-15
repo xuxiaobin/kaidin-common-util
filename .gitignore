@@ -1,11 +1,21 @@
-# Default ignored files
+# git
+*.git
 .gitignore
+
+# config
+*.project
+.settings
+*.settings/
+.classpath
+*.classpath
 .idea/*
 
 /src/test/resources/image/output/*
 
+# generated files
 /target/classes/*
 /target/test-classes/*
 /target/surefire-reports/*
 /target/maven-archiver/*
 /target/*.jar
+bin/
