@@ -10,7 +10,7 @@
 *.classpath
 .idea/*
 
-/src/test/resources/image/output/*
+/src/test/resources/output/image/*
 
 # generated files
 /target/classes/*
