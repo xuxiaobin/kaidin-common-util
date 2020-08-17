@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 集合转换工具
@@ -124,8 +125,7 @@ public abstract class CollectionUtil {
 		if (null == dataArray) {
 			return null;
 		}
-
-		return (ArrayList<T>) Arrays.asList(dataArray);
+		return (ArrayList) Arrays.stream(dataArray).collect(Collectors.toList());
 	}
 
 	/**
@@ -147,7 +147,7 @@ public abstract class CollectionUtil {
 	 */
 	public static final <T> List<T> subList(List<T> dataList, int fromIndex, int toIndex) {
 		if (0 >= toIndex || CollectionUtil.isEmpty(dataList)) {
-			return null;
+			return dataList;
 		}
 		int listSize = dataList.size();
 		fromIndex = Math.min(fromIndex, listSize);

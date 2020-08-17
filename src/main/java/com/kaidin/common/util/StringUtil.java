@@ -394,19 +394,12 @@ public abstract class StringUtil {
 			start += strLen;
 		}
 
-		if (end > strLen) {
-			end = strLen;
-		}
+		end = Math.min(strLen, end);
 		if (start > end) {
 			return EMPTY_STR;
 		}
-
-		if (start < 0) {
-			start = 0;
-		}
-		if (end < 0) {
-			end = 0;
-		}
+		start = Math.max(0, start);
+		end = Math.max(0, end);
 
 		return str.substring(start, end);
 	}

@@ -121,7 +121,7 @@ public class Watermark extends BaseImage {
 		int firstLength = imageWidth * imageHeight / imageDiagonalLength;
 		int secondLength = imageHeight * imageDiagonalLength / imageWidth;
 		int positionX = 0;
-		int step = (int) (fontSize * 2.5);
+		int step = (int) (fontSize * 5);
 		for (int positionY = step; positionY < firstLength * 2 - step; positionY += step) {
 			if (positionY < firstLength) {
 				positionX = (int) (positionY * degreeTan);

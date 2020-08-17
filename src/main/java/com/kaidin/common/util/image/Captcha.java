@@ -120,13 +120,13 @@ public class Captcha extends BaseImage {
 		int codeWidth = Double.valueOf(fontSize * CODE_WIDTH).intValue(); // 字符的宽度
 		int codeX = Double.valueOf(codeWidth * (1 - CODE_WIDTH)).intValue(); // 开始画的横坐标
 		int codeY = Double.valueOf(fontSize * CODE_WIDTH).intValue(); // 开始画的纵坐标
-		System.out.println("(" + codeX + "," + codeY + ")");
+//		System.out.println("(" + codeX + "," + codeY + ")");
 		graphics.setFont(font);
 		for (int index = 0; index < codeArray.length; index++) {
 			//			graphics.drawString(String.valueOf(codeArray[i]), codeX, codeY);
 			// 每次画一个字符
 			Color color = createColor();
-			System.out.println("\t" + color);
+//			System.out.println("\t" + color);
 			graphics.setColor(color);
 			graphics.drawChars(codeArray, index, 1, codeX, codeY);
 			codeX += codeWidth; // 横坐标偏移一个字符距离
@@ -135,7 +135,7 @@ public class Captcha extends BaseImage {
 
 	/**
 	 * 绘制干扰线
-	 * @param graphics
+	 * @param buffImg
 	 */
 	private void drawDisturbLine(BufferedImage buffImg) {
 		int xOffset = 20, yOffset = 10; // 两个点之间的偏移量
@@ -203,7 +203,7 @@ public class Captcha extends BaseImage {
 			int rg = Math.abs(r - g);
 			int rb = Math.abs(r - b);
 			int gb = Math.abs(g - b);
-			System.out.println(r + "," + g + "," + b);
+//			System.out.println(r + "," + g + "," + b);
 			if (10 < rg && 10 < rb && 10 < gb) {
 				break;
 			}
