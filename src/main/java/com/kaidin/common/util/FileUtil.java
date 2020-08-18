@@ -4,10 +4,18 @@
  */
 package com.kaidin.common.util;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +36,64 @@ public abstract class FileUtil {
 	/** 拷贝文件使用的buffsize 2M */
 	private final static long   BUFF_SIZE  = ConstType.fileSize.M_SIZE * 2;
 	private final static char[] UNIT_ARRAY = ConstType.fileSize.UNITS.toCharArray();
+
+	/**
+	 * 读取文件按行返回
+	 * @param fileName
+	 * @param startNum
+	 * @return
+	 */
+	public static List<String> readFile(String fileName, int startNum) {
+		List<String> result = new ArrayList<>();
+
+		try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+			String lineContent = reader.readLine();
+			for (int i = 0; null != lineContent; i++) {
+				if (i >= startNum) {
+					result.add(lineContent);
+				}
+				lineContent = reader.readLine();
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+		return result;
+	}
+
+	/**
+	 * 添加文件
+	 * @param fileName
+	 * @param countet
+	 */
+	public static synchronized void write(String fileName, String countet, boolean append) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, append))) {
+			writer.append(countet);
+			writer.flush();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 添加文件
+	 * @param fileName
+	 * @param countet
+	 */
+	public static synchronized void writeAppend(String fileName, String countet) {
+		write(fileName, countet, true);
+	}
+
+	public static void downloadFile(String urlStr, String absFileName) throws IOException {
+		try (InputStream inputStream = new DataInputStream(new URL(urlStr).openStream());
+		        OutputStream outputStream = new FileOutputStream(new File(absFileName))) {
+			byte[] buffer = new byte[1024];
+			int length;
+			while ((length = inputStream.read(buffer)) > 0) {
+				outputStream.write(buffer, 0, length);
+			}
+		}
+	}
 
 	/**
 	 * 拷贝文件
