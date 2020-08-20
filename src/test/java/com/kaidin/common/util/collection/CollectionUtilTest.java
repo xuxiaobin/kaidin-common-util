@@ -22,6 +22,8 @@ public class CollectionUtilTest {
         Assert.assertTrue(CollectionUtil.isEmpty(array));
         array = new String[5];
         Assert.assertTrue(CollectionUtil.isEmpty(array));
+        array[3] = "123";
+        Assert.assertFalse(CollectionUtil.isEmpty(array));
 
         Map<String, String> map = null;
         Assert.assertTrue(CollectionUtil.isEmpty(map));
@@ -33,8 +35,14 @@ public class CollectionUtilTest {
     public void testIsNotEmpty() {
         Collection<String> collection = Arrays.asList("123");
         Assert.assertTrue(CollectionUtil.isNotEmpty(collection));
-        String[] array = {"123"};
+
+        String[] array = null;
+        Assert.assertFalse(CollectionUtil.isNotEmpty(array));
+        array = new String[5];
+        Assert.assertFalse(CollectionUtil.isNotEmpty(array));
+        array[3] = "123";
         Assert.assertTrue(CollectionUtil.isNotEmpty(array));
+
         Map<String, String> map = new HashMap<>();
         map.put("122", "123");
         Assert.assertTrue(CollectionUtil.isNotEmpty(map));
@@ -42,13 +50,16 @@ public class CollectionUtilTest {
 
     @Test
     public void testAsArray() {
+        Assert.assertNull(CollectionUtil.asArray(null));
+
         Collection<String> dataList = Arrays.asList("123", "abc", "xxx", "yyy");
         Object[] objArrray = {"123", "abc", "xxx", "yyy"};
-        Assert.assertEquals(CollectionUtil.asArray(dataList), objArrray);
+        Assert.assertEquals(objArrray, CollectionUtil.asArray(dataList));
     }
 
     @Test
     public void testAsArrayList() {
+        Assert.assertNull(CollectionUtil.asArrayList(null));
         Collection<String> dataList = Arrays.asList("123", "abc", "xxx", "yyy");
         Object[] objArrray = {"123", "abc", "xxx", "yyy"};
         Assert.assertEquals(dataList, CollectionUtil.asArrayList(objArrray));

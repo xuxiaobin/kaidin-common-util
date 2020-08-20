@@ -47,8 +47,8 @@ public class DateTimeUtilTest {
 
     @Test
     public void testConvertTimesToStringWithDecimalism() {
-        String[] UNIT_ARRAY       = new String[] { "毫秒", "秒", "分", "小时", "天" };
-        long[]   DECIMALISM_ARRAY = new long[] { 1000, 60, 60, 24, Long.MAX_VALUE };
+        String[] UNIT_ARRAY = new String[]{"毫秒", "秒", "分", "小时", "天"};
+        long[] DECIMALISM_ARRAY = new long[]{1000, 60, 60, 24, Long.MAX_VALUE};
         Assert.assertNull(DateTimeUtil.convertTimesToString(null, UNIT_ARRAY, DECIMALISM_ARRAY));
         Assert.assertEquals("10毫秒", DateTimeUtil.convertTimesToString(10L, UNIT_ARRAY, DECIMALISM_ARRAY));
         Assert.assertEquals("1天10小时17分36秒789毫秒", DateTimeUtil.convertTimesToString(123456789L, UNIT_ARRAY, DECIMALISM_ARRAY));
@@ -76,7 +76,7 @@ public class DateTimeUtilTest {
         Date expectedDate = new Date(now.getTime());
 
         expectedDate.setHours(now.getHours() + 1);
-        Assert.assertEquals(expectedDate, DateTimeUtil.addHours(null, 1));
+        Assert.assertEquals(DateTimeUtil.getDateToString(expectedDate), DateTimeUtil.getDateToString(DateTimeUtil.addHours(null, 1)));
         Assert.assertEquals(expectedDate, DateTimeUtil.addHours(now, 1));
 
         expectedDate.setHours(now.getHours() - 2);
@@ -92,7 +92,7 @@ public class DateTimeUtilTest {
         Date expectedDate = new Date(now.getTime());
 
         expectedDate.setDate(now.getDate() + 1);
-        Assert.assertEquals(expectedDate, DateTimeUtil.addDays(null, 1));
+        Assert.assertEquals(DateTimeUtil.getDateToString(expectedDate), DateTimeUtil.getDateToString(DateTimeUtil.addDays(null, 1)));
         Assert.assertEquals(expectedDate, DateTimeUtil.addDays(now, 1));
 
         expectedDate.setDate(now.getDate() - 2);
@@ -108,7 +108,7 @@ public class DateTimeUtilTest {
         Date expectedDate = new Date(now.getTime());
 
         expectedDate.setMonth(now.getMonth() + 1);
-        Assert.assertEquals(expectedDate, DateTimeUtil.addMonths(null, 1));
+        Assert.assertEquals(DateTimeUtil.getDateToString(expectedDate), DateTimeUtil.getDateToString(DateTimeUtil.addMonths(null, 1)));
         Assert.assertEquals(expectedDate, DateTimeUtil.addMonths(now, 1));
 
         expectedDate.setMonth(now.getMonth() - 2);
