@@ -12,14 +12,14 @@ public class DefaultUtilTest {
 
     @Test
     public void ifNull() {
-        Assert.assertEquals(DefaultUtil.ifNull("123", "456"), "123");
-        Assert.assertEquals(DefaultUtil.ifNull(null, "456"), "456");
+        Assert.assertEquals("123", DefaultUtil.ifNull("123", "456"));
+        Assert.assertEquals("456", DefaultUtil.ifNull(null, "456"));
     }
 
     @Test
     public void ifEmpty() {
-        Assert.assertEquals(DefaultUtil.ifEmpty("123", "456"), "123");
-        Assert.assertEquals(DefaultUtil.ifEmpty("", "456"), "456");
-        Assert.assertEquals(DefaultUtil.ifEmpty(null, "456"), "456");
+        Assert.assertEquals("123", DefaultUtil.ifEmpty("123", "456"));
+        Assert.assertEquals("456", DefaultUtil.ifEmpty("", "456"));
+        Assert.assertEquals("456", DefaultUtil.ifEmpty(null, "456"));
     }
 }

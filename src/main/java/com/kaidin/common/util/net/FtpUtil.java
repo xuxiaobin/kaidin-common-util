@@ -93,11 +93,7 @@ public class FtpUtil {
 	/**
 	 * Description: 向FTP服务器上传文件
 	 * 
-	 * @param hostname
-	 * @param port
-	 * @param userName
-	 * @param password
-	 * @param path
+	 * @param remotePath
 	 * @param remoteFileName
 	 * @param localFileName 本地文件名称
 	 * @return 成功返回true，否则返回false

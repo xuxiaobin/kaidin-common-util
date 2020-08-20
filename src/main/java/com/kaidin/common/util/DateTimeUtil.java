@@ -7,6 +7,8 @@ package com.kaidin.common.util;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -20,15 +22,14 @@ public abstract class DateTimeUtil {
 	/** 默认的时间格式 */
 	private static final String   DEFALT_PATTERN   = "yyyy-MM-dd HH:mm:ss";
 	/** 单位 */
-	private static final String[] UNIT_ARRAY       = new String[] { "秒", "分", "小时", "天" };
+	private static final String[] UNIT_ARRAY       = new String[] { StringUtil.EMPTY_STR, "秒", "分", "小时", "天" };
 	/** 单位之间的进率 */
-	private static final long[]   DECIMALISM_ARRAY = new long[] { 1000 * 60, 60, 24, Long.MAX_VALUE };
+	private static final long[]   DECIMALISM_ARRAY = new long[] { 1000, 60, 60, 24, Long.MAX_VALUE };
 
 	/**
 	 * 把字符串值格式化成Date类型
 	 * @param dateStr
 	 * @param pattern
-	 * @return
 	 * @throws ParseException
 	 */
 	public static Date getStringToDate(String dateStr, String pattern) throws ParseException {
@@ -43,7 +44,6 @@ public abstract class DateTimeUtil {
 	/**
 	 * 把yyyy-MM-dd HH:mm:ss形式的字符串转成date类型
 	 * @param dateStr
-	 * @return
 	 * @throws ParseException
 	 */
 	public static Date getStringToDate(String dateStr) throws ParseException {
@@ -53,24 +53,32 @@ public abstract class DateTimeUtil {
 	/**
 	 * 获取source的yyyy-MM-dd HH:mm:ss字符串形式
 	 * @param source
+	 * @param pattern
 	 * @return
 	 */
-	public static String getDateToString(Date source) {
+	public static String getDateToString(Date source, String pattern) {
 		if (null == source) {
 			return null;
 		}
 
-		DateFormat format = new SimpleDateFormat(DEFALT_PATTERN);
+		DateFormat format = new SimpleDateFormat(pattern);
 		return format.format(source);
 	}
 
 	/**
-	 * 获取当前时间的yyyy-MM-dd HH:mm:ss字符串形式
+	 * 获取source的yyyy-MM-dd HH:mm:ss字符串形式
 	 * @param source
 	 * @return
 	 */
+	public static String getDateToString(Date source) {
+		return getDateToString(source, DEFALT_PATTERN);
+	}
+
+	/**
+	 * 获取当前时间的yyyy-MM-dd HH:mm:ss字符串形式
+	 */
 	public static String getDateToString() {
-		return getDateToString(new Date());
+		return getDateToString(new Date(), DEFALT_PATTERN);
 	}
 
 	/**
@@ -87,12 +95,13 @@ public abstract class DateTimeUtil {
 		if (null == times || 0 > times) {
 			return null;
 		}
-
 		String result = StringUtil.EMPTY_STR;
 		for (int i = 0; i < decimalisms.length; i++) {
 			long count = times % decimalisms[i];
-			result = count + units[i] + result;
 			times /= decimalisms[i];
+			if (StringUtil.isNotEmpty(units[i])) {
+				result = count + units[i] + result;
+			}
 			if (0 >= times) {
 				break;
 			}
@@ -109,8 +118,6 @@ public abstract class DateTimeUtil {
 	 * @return
 	 */
 	public static String convertTimesToString(Long times) {
-		//		String[] units = new String[]{"毫秒", "秒", "分", "小时", "天"};
-		//		long [] decimalisms = new long[]{1000, 60, 60, 24, Long.MAX_VALUE};
 		return convertTimesToString(times, UNIT_ARRAY, DECIMALISM_ARRAY);
 	}
 
@@ -132,13 +139,33 @@ public abstract class DateTimeUtil {
 	}
 
 	/**
-	 * 获取传入时间的前一个小时的开始时间
-	 * 比如2010-10-23 05:03:05 => 2010-10-23 04:00:00
+	 * 添加offset天数，offset可以为负数
 	 * @param source
+	 * @param offset
 	 * @return
 	 */
-	public static Date getLastHourBeginTime(Date source) {
-		return getThisHourBeginTime(addHours(source, -1));
+	public static Date addDays(Date source, int offset) {
+		Calendar c = Calendar.getInstance();
+		if (null != source) {
+			c.setTime(source);
+		}
+		c.add(Calendar.DATE, offset);
+		return c.getTime();
+	}
+
+	/**
+	 * 添加offset月数，offset可以为负数
+	 * @param source
+	 * @param offset
+	 * @return
+	 */
+	public static Date addMonths(Date source, int offset) {
+		Calendar c = Calendar.getInstance();
+		if (null != source) {
+			c.setTime(source);
+		}
+		c.add(Calendar.MONTH, offset);
+		return c.getTime();
 	}
 
 	/**
@@ -159,41 +186,6 @@ public abstract class DateTimeUtil {
 	}
 
 	/**
-	 * 获取传入时间的下一天的开始时间
-	 * 比如2010-10-23 05:03:05 => 2010-10-23 06:00:00
-	 * @param source
-	 * @return
-	 */
-	public static Date getNextHourBeginTime(Date source) {
-		return getThisHourBeginTime(addHours(source, 1));
-	}
-
-	/**
-	 * 添加offset天数，offset可以为负数
-	 * @param source
-	 * @param offset
-	 * @return
-	 */
-	public static Date addDays(Date source, int offset) {
-		Calendar c = Calendar.getInstance();
-		if (null != source) {
-			c.setTime(source);
-		}
-		c.add(Calendar.DATE, offset);
-		return c.getTime();
-	}
-
-	/**
-	 * 获取传入时间的前一天的开始时间
-	 * 比如2010-10-23 05:03:05 => 2010-10-22 00:00:00
-	 * @param source
-	 * @return
-	 */
-	public static Date getLastDayBeginTime(Date source) {
-		return getThisDayBeginTime(addDays(source, -1));
-	}
-
-	/**
 	 * 获取传入时间的天开始时间
 	 * 比如2010-10-23 05:03:05 => 2010-10-23 00:00:00
 	 * @param source
@@ -209,26 +201,6 @@ public abstract class DateTimeUtil {
 		c.set(Calendar.SECOND, 0);
 		c.set(Calendar.MILLISECOND, 0);
 		return c.getTime();
-	}
-
-	/**
-	 * 获取传入时间的下一天的开始时间
-	 * 比如2010-10-23 05:03:05 => 2010-10-25 00:00:00
-	 * @param source
-	 * @return
-	 */
-	public static Date getNextDayBeginTime(Date source) {
-		return getThisDayBeginTime(addDays(source, 1));
-	}
-
-	/**
-	 * 获取传入时间的周的上个周一开始时间
-	 * 比如2010-10-23 05:03:05 => 2010-10-18 00:00:00
-	 * @param source
-	 * @return
-	 */
-	public static Date getLastWeekBeginTime(Date source) {
-		return getThisWeekBeginTime(addDays(source, -7));
 	}
 
 	/**
@@ -252,50 +224,6 @@ public abstract class DateTimeUtil {
 	}
 
 	/**
-	 * 获取传入时间的周下周一开始时间
-	 * 比如2010-10-23 05:03:05 => 2010-10-25 00:00:00
-	 * @param source
-	 * @return
-	 */
-	public static Date getNextWeekBeginTime(Date source) {
-		return getThisWeekBeginTime(addDays(source, 7));
-	}
-
-	public static int getDayNumOfMonth(Date source) {
-		Calendar c = Calendar.getInstance();
-		if (null != source) {
-			c.setTime(source);
-		}
-
-		return c.getActualMaximum(Calendar.DAY_OF_MONTH);
-	}
-
-	/**
-	 * 添加offset月数，offset可以为负数
-	 * @param source
-	 * @param offset
-	 * @return
-	 */
-	public static Date addMonths(Date source, int offset) {
-		Calendar c = Calendar.getInstance();
-		if (null != source) {
-			c.setTime(source);
-		}
-		c.add(Calendar.MONTH, offset);
-		return c.getTime();
-	}
-
-	/**
-	 * 获取传入时间的月上一个月的一号开始时间
-	 * 比如2010-10-23 05:03:05 => 2010-09-01 00:00:00
-	 * @param source
-	 * @return
-	 */
-	public static Date getLastMonthBeginTime(Date source) {
-		return getThisMonthBeginTime(addMonths(source, -1));
-	}
-
-	/**
 	 * 获取传入时间的月的一号开始时间
 	 * 比如2010-10-23 05:03:05 => 2010-10-01 00:00:00
 	 * @param source
@@ -316,6 +244,76 @@ public abstract class DateTimeUtil {
 	}
 
 	/**
+	 * 获取传入时间的前一个小时的开始时间
+	 * 比如2010-10-23 05:03:05 => 2010-10-23 04:00:00
+	 * @param source
+	 * @return
+	 */
+	public static Date getLastHourBeginTime(Date source) {
+		return getThisHourBeginTime(addHours(source, -1));
+	}
+
+	/**
+	 * 获取传入时间的前一天的开始时间
+	 * 比如2010-10-23 05:03:05 => 2010-10-22 00:00:00
+	 * @param source
+	 * @return
+	 */
+	public static Date getLastDayBeginTime(Date source) {
+		return getThisDayBeginTime(addDays(source, -1));
+	}
+
+	/**
+	 * 获取传入时间的周的上个周一开始时间
+	 * 比如2010-10-23 05:03:05 => 2010-10-18 00:00:00
+	 * @param source
+	 * @return
+	 */
+	public static Date getLastWeekBeginTime(Date source) {
+		return getThisWeekBeginTime(addDays(source, -7));
+	}
+
+	/**
+	 * 获取传入时间的月上一个月的一号开始时间
+	 * 比如2010-10-23 05:03:05 => 2010-09-01 00:00:00
+	 * @param source
+	 * @return
+	 */
+	public static Date getLastMonthBeginTime(Date source) {
+		return getThisMonthBeginTime(addMonths(source, -1));
+	}
+
+	/**
+	 * 获取传入时间的下一天的开始时间
+	 * 比如2010-10-23 05:03:05 => 2010-10-23 06:00:00
+	 * @param source
+	 * @return
+	 */
+	public static Date getNextHourBeginTime(Date source) {
+		return getThisHourBeginTime(addHours(source, 1));
+	}
+
+	/**
+	 * 获取传入时间的下一天的开始时间
+	 * 比如2010-10-23 05:03:05 => 2010-10-25 00:00:00
+	 * @param source
+	 * @return
+	 */
+	public static Date getNextDayBeginTime(Date source) {
+		return getThisDayBeginTime(addDays(source, 1));
+	}
+
+	/**
+	 * 获取传入时间的周下周一开始时间
+	 * 比如2010-10-23 05:03:05 => 2010-10-25 00:00:00
+	 * @param source
+	 * @return
+	 */
+	public static Date getNextWeekBeginTime(Date source) {
+		return getThisWeekBeginTime(addDays(source, 7));
+	}
+
+	/**
 	 * 获取传入时间的月下一个月的一号开始时间
 	 * 比如2010-10-23 05:03:05 => 2010-11-01 00:00:00
 	 * @param source
@@ -326,7 +324,21 @@ public abstract class DateTimeUtil {
 	}
 
 	/**
-	 * 获取是当年的第几天
+	 * 获取这个月有几天
+	 * @param source
+	 * @return
+	 */
+	public static int getDayNumOfMonth(Date source) {
+		Calendar c = Calendar.getInstance();
+		if (null != source) {
+			c.setTime(source);
+		}
+
+		return c.getActualMaximum(Calendar.DAY_OF_MONTH);
+	}
+
+	/**
+	 * 获取是这一年有几天
 	 * @param source
 	 * @return
 	 */

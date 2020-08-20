@@ -171,7 +171,7 @@ public class StringUtilTest {
 
 	@Test
 	public void testSubstring() {
-		Assert.assertEquals(null, StringUtil.subString(null, 1, 2));
+		Assert.assertNull(StringUtil.subString(null, 1, 2));
 		Assert.assertEquals(StringUtil.EMPTY_STR, StringUtil.subString(StringUtil.EMPTY_STR, 1, 2));
 		Assert.assertEquals("12", StringUtil.subString("123456", 0, 2));
 		Assert.assertEquals(StringUtil.EMPTY_STR, StringUtil.subString("123456", 2, 0));
@@ -188,7 +188,7 @@ public class StringUtilTest {
 		Assert.assertEquals("12345xx", StringUtil.format("12{0}45{1}", 3, "xx"));
 		Assert.assertEquals("12345xxnull", StringUtil.format("12{0}45{1}{2}", 3, "xx", null));
 
-		Assert.assertEquals(null, StringUtil.format(null, 3, "xx"));
+		Assert.assertNull(StringUtil.format(null, 3, "xx"));
 		Assert.assertEquals("12{0}45{1}", StringUtil.format("12{0}45{1}", null));
 	}
 

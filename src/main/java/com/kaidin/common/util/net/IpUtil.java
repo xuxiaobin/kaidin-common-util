@@ -109,7 +109,7 @@ public abstract class IpUtil {
 
 	/**
 	 * 字符串ip转换为long
-	 * @param 字符串ip
+	 * @param ipStr
 	 * @return
 	 */
 	public static Long asLongIp(String ipStr) {
@@ -162,7 +162,7 @@ public abstract class IpUtil {
 
 	/**
 	 * 长整型ip转换为string
-	 * @param long型ip
+	 * @param ipLong
 	 * @return
 	 */
 	public static String asStringIp(Long ipLong) {

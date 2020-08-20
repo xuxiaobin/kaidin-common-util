@@ -17,9 +17,12 @@ import com.kaidin.common.util.ToString;
  */
 public class PageRequest extends ToString {
 	private static final long serialVersionUID = 9104457759636937598L;
-	private int               offset           = 1;                   // 记录开始部分，默认1
-	private int               limit            = 20;                  // 记录条数限制，默认20条
-	private SortRequest     sortContainer;                          // 排序使用
+	/** 记录开始部分，默认为1 */
+	private int               offset           = 1;
+	/** 记录条数限制，默认为20 */
+	private int               limit            = 20;
+	/** 排序使用 */
+	private SortRequest     sortContainer;
 
 	public int getOffset() {
 		return Math.max(offset, 1);

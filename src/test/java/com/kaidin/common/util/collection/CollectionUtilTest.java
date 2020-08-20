@@ -62,7 +62,7 @@ public class CollectionUtilTest {
         Assert.assertEquals(strList, CollectionUtil.subList(strList, 100));
         Assert.assertEquals(strList.subList(1, strList.size()), CollectionUtil.subList(strList, 1, 100));
 
-        Assert.assertEquals(null, CollectionUtil.subList(null, 2));
+        Assert.assertNull(CollectionUtil.subList(null, 2));
         Assert.assertEquals(new ArrayList<>(), CollectionUtil.subList(new ArrayList<>(), 2));
     }
 
