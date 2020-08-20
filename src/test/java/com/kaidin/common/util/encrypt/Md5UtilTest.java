@@ -18,7 +18,7 @@ public class Md5UtilTest {
     private static File FILE         = new File(Md5UtilTest.class.getClassLoader().getResource("input/md5TestFile.txt").getFile());
 
     @Test
-    public void testMmd5() {
+    public void testMd5() {
         Assert.assertEquals("e10adc3949ba59abbe56e057f20f883e", EncryptUtil.md5(STR_12345));
         Assert.assertEquals("0192023a7bbd73250516f069df18b500", EncryptUtil.md5(STR_ADMIN123));
         Assert.assertEquals("d41d8cd98f00b204e9800998ecf8427e", EncryptUtil.md5(StringUtil.EMPTY_STR));

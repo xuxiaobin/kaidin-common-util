@@ -25,7 +25,7 @@ public class EncryptUtilTest extends Md5UtilTest {
 
 	@Test
 	public void testMd5() {
-		super.testMmd5();
+		super.testMd5();
 	}
 
 	@Test
