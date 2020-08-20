@@ -16,6 +16,8 @@ import java.text.MessageFormat;
 public abstract class StringUtil {
 	/** 空字符串 */
 	public static final String EMPTY_STR = "";
+	/** null字符串 */
+	public static final String NULL_STR = "null";
 
 	/**
 	 * 判断字符串是否为空

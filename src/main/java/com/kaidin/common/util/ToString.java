@@ -15,7 +15,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * @author kaidin@foxmail.com
  * @date 2018年7月10日 上午11:41:17
  */
-public class ToString implements Serializable {
+public abstract class ToString implements Serializable {
 	/**  */
 	private static final long serialVersionUID = 6329620916091252588L;
 

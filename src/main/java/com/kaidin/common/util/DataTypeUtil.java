@@ -15,7 +15,6 @@ import java.util.Date;
  * @date 2015-6-23下午01:51:48
  */
 public abstract class DataTypeUtil {
-	private static final String NULL_STR = "null";
 
 	public static Byte asByte(Object obj) {
 		if (null == obj) {
@@ -25,15 +24,11 @@ public abstract class DataTypeUtil {
 			return ((Number) obj).byteValue();
 		}
 		String objStr = obj.toString();
-		if (0 < objStr.length() && !NULL_STR.equals(objStr)) {
+		if (0 < objStr.length() && !StringUtil.NULL_STR.equals(objStr)) {
 			return Byte.valueOf(objStr, 10);
 		}
 
 		return null;
-	}
-
-	public static Byte asByte(Object obj, byte defaultValue) {
-		return null == obj ? defaultValue : asByte(obj);
 	}
 
 	public static Short asShort(Object obj) {
@@ -44,15 +39,11 @@ public abstract class DataTypeUtil {
 			return ((Number) obj).shortValue();
 		}
 		String objStr = obj.toString();
-		if (0 < objStr.length() && !NULL_STR.equals(objStr)) {
+		if (0 < objStr.length() && !StringUtil.NULL_STR.equals(objStr)) {
 			return Short.valueOf(objStr, 10);
 		}
 
 		return null;
-	}
-
-	public static Short asShort(Object obj, short defaultValue) {
-		return null == obj ? defaultValue : asShort(obj);
 	}
 
 	public static Integer asInteger(Object obj) {
@@ -63,15 +54,11 @@ public abstract class DataTypeUtil {
 			return ((Number) obj).intValue();
 		}
 		String objStr = obj.toString();
-		if (0 < objStr.length() && !NULL_STR.equals(objStr)) {
+		if (0 < objStr.length() && !StringUtil.NULL_STR.equals(objStr)) {
 			return Integer.valueOf(objStr);
 		}
 
 		return null;
-	}
-
-	public static Integer asInteger(Object obj, int defaultValue) {
-		return null == obj ? defaultValue : asInteger(obj);
 	}
 
 	public static Long asLong(Object obj) {
@@ -82,15 +69,11 @@ public abstract class DataTypeUtil {
 			return ((Number) obj).longValue();
 		}
 		String objStr = obj.toString();
-		if (0 < objStr.length() && !NULL_STR.equals(objStr)) {
+		if (0 < objStr.length() && !StringUtil.NULL_STR.equals(objStr)) {
 			return Long.valueOf(objStr);
 		}
 
 		return null;
-	}
-
-	public static Long asLong(Object obj, long defaultValue) {
-		return null == obj ? defaultValue : asLong(obj);
 	}
 
 	public static Float asFloat(Object obj) {
@@ -101,15 +84,11 @@ public abstract class DataTypeUtil {
 			return ((Number) obj).floatValue();
 		}
 		String objStr = obj.toString();
-		if (0 < objStr.length() && !NULL_STR.equals(objStr)) {
+		if (0 < objStr.length() && !StringUtil.NULL_STR.equals(objStr)) {
 			return Float.valueOf(objStr);
 		}
 
 		return null;
-	}
-
-	public static Float asFloat(Object obj, float defaultValue) {
-		return null == obj ? defaultValue : asFloat(obj);
 	}
 
 	public static Double asDouble(Object obj) {
@@ -120,15 +99,11 @@ public abstract class DataTypeUtil {
 			return ((Number) obj).doubleValue();
 		}
 		String objStr = obj.toString();
-		if (0 < objStr.length() && !NULL_STR.equals(objStr)) {
+		if (0 < objStr.length() && !StringUtil.NULL_STR.equals(objStr)) {
 			return Double.valueOf(objStr);
 		}
 
 		return null;
-	}
-
-	public static Double asDouble(Object obj, double defaultValue) {
-		return null == obj ? defaultValue : asDouble(obj);
 	}
 
 	public static BigDecimal asBigDecimal(Object obj) {
@@ -136,16 +111,13 @@ public abstract class DataTypeUtil {
 			return null;
 		}
 		String objStr = String.valueOf(obj);
-		if (0 < objStr.length() && !NULL_STR.equals(objStr)) {
+		if (0 < objStr.length() && !StringUtil.NULL_STR.equals(objStr)) {
 			return new BigDecimal(objStr);
 		}
 
 		return null;
 	}
 
-	public static BigDecimal asBigDecimal(Object obj, BigDecimal defaultValue) {
-		return null == obj ? defaultValue : asBigDecimal(obj);
-	}
 
 	public static Boolean asBoolean(Object obj) {
 		if (null == obj) {
@@ -169,10 +141,6 @@ public abstract class DataTypeUtil {
 		throw new RuntimeException("dataType 'Boolean' transform error:" + obj.toString());
 	}
 
-	public static Boolean asBoolean(Object obj, boolean defaultValue) {
-		return null == obj ? defaultValue : asBoolean(obj);
-	}
-
 	public static Character asCharacter(Object obj) {
 		if (null == obj) {
 			return null;
@@ -189,16 +157,8 @@ public abstract class DataTypeUtil {
 		return new Character(obj.toString().charAt(0));
 	}
 
-	public static Character asCharacter(Object obj, char defaultValue) {
-		return null == obj ? defaultValue : asCharacter(obj);
-	}
-
 	public static String asString(Object obj) {
 		return null == obj ? null : obj.toString();
-	}
-
-	public static String asString(Object obj, String defaultValue) {
-		return null == obj ? defaultValue : asString(obj);
 	}
 
 	public static Date asDate(Object obj) {
@@ -220,9 +180,5 @@ public abstract class DataTypeUtil {
 			}
 		}
 		throw new RuntimeException("dataType 'Date' transform error:" + obj.toString());
-	}
-
-	public static Date asDate(Object obj, Date defaultValue) {
-		return null == obj ? defaultValue : asDate(obj);
 	}
 }
