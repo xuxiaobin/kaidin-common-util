@@ -27,7 +27,7 @@ public abstract class NumberUtil {
 	 * @param divisor
 	 * @return
 	 */
-	public static Number divided(Number dividend, Number divisor) {
+	public static Double divided(Number dividend, Number divisor) {
 		if (null != dividend && null != divisor && 0.0 != divisor.doubleValue()) {
 			// 判空和除数不能为0
 			return dividend.doubleValue() / divisor.doubleValue();
@@ -82,6 +82,9 @@ public abstract class NumberUtil {
 	 * @return
 	 */
 	public static String formatEndOf0(Number number) {
+		if (null == number) {
+			return null;
+		}
 		String result = String.valueOf(number);
 		if (null != result && 0 < result.indexOf(".")) {
 			// 正则表达
@@ -99,6 +102,9 @@ public abstract class NumberUtil {
 	 * @return
 	 */
 	public static String formatWithoutComma(Number number) {
+		if (null == number) {
+			return null;
+		}
 		NumberFormat numberFormat = NumberFormat.getNumberInstance();
 		numberFormat.setGroupingUsed(false); // 设置了以后不会有千分位，默认true
 

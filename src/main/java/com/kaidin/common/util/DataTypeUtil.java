@@ -110,6 +110,9 @@ public abstract class DataTypeUtil {
 		if (null == obj) {
 			return null;
 		}
+		if (obj instanceof BigDecimal) {
+			return (BigDecimal) obj;
+		}
 		String objStr = String.valueOf(obj);
 		if (0 < objStr.length() && !StringUtil.NULL_STR.equals(objStr)) {
 			return new BigDecimal(objStr);
@@ -123,7 +126,6 @@ public abstract class DataTypeUtil {
 		if (null == obj) {
 			return null;
 		}
-
 		if (obj instanceof Boolean) {
 			return (Boolean) obj;
 		}
@@ -146,15 +148,16 @@ public abstract class DataTypeUtil {
 			return null;
 		}
 		if (obj instanceof Character) {
-			return ((Character) obj).charValue();
-		}
-		if ((obj instanceof String) && (((String) obj).length() == 1)) {
-			return ((String) obj).charAt(0);
+			return (Character) obj;
 		}
 		if (obj instanceof Boolean) {
 			return (Boolean) obj ? 'T' : 'F';
 		}
-		return new Character(obj.toString().charAt(0));
+		String str = obj.toString();
+		if (StringUtil.isEmpty(str)) {
+			return null;
+		}
+		return new Character(str.charAt(0));
 	}
 
 	public static String asString(Object obj) {
@@ -165,7 +168,6 @@ public abstract class DataTypeUtil {
 		if (null == obj) {
 			return null;
 		}
-
 		if (obj instanceof Date) {
 			return (Date) obj;
 		}

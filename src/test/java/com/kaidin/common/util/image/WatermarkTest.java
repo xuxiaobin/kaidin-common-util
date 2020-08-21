@@ -6,8 +6,10 @@ package com.kaidin.common.util.image;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.io.File;
 import java.io.IOException;
 
+import com.kaidin.common.util.TestCfg;
 import org.junit.Test;
 
 import com.kaidin.common.util.FileUtil;
@@ -20,9 +22,7 @@ import com.kaidin.common.util.FileUtil;
  * @date 2018年7月11日 下午10:13:38
  */
 public class WatermarkTest {
-	private static final String INPUT_PATH       = "src/test/resources/input/image/";
-	private static final String OUTPUT_PATH       = "src/test/resources/output/image/";
-	private static final String SOURCE_IMAGE_NAME = INPUT_PATH + "cat.jpg";
+	private static final String SOURCE_IMAGE_NAME = TestCfg.INPUT_PATH + File.separator + "image/cat.jpg";
 
 	/**
 	 * 水印是一个图片
@@ -30,29 +30,30 @@ public class WatermarkTest {
 	 */
 	@Test
 	public void testPressImage() throws IOException {
-		String watermarkImage = INPUT_PATH + "head.jpg";
+		String watermarkImage = TestCfg.INPUT_PATH + File.separator + "image/head.jpg";
 
-		String outputImageFile = OUTPUT_PATH + "left-top.jpg";
+		
+		String outputImageFile = TestCfg.OUTPUT_PATH + File.separator + "image/left-top.jpg";
 		FileUtil.deleteFiles(outputImageFile);
 		FileUtil.copyFiles(SOURCE_IMAGE_NAME, outputImageFile);
 		Watermark.pressImage(outputImageFile, watermarkImage, "left-top", 45F);
 
-		outputImageFile = OUTPUT_PATH + "right-top.jpg";
+		outputImageFile = TestCfg.OUTPUT_PATH + File.separator + "/image/right-top.jpg";
 		FileUtil.deleteFiles(outputImageFile);
 		FileUtil.copyFiles(SOURCE_IMAGE_NAME, outputImageFile);
 		Watermark.pressImage(outputImageFile, watermarkImage, "right-top", 90F);
 
-		outputImageFile = OUTPUT_PATH + "left-bottom.jpg";
+		outputImageFile = TestCfg.OUTPUT_PATH + File.separator + "/image/left-bottom.jpg";
 		FileUtil.deleteFiles(outputImageFile);
 		FileUtil.copyFiles(SOURCE_IMAGE_NAME, outputImageFile);
 		Watermark.pressImage(outputImageFile, watermarkImage, "left-bottom", 135F);
 
-		outputImageFile = OUTPUT_PATH + "right-bottom.jpg";
+		outputImageFile = TestCfg.OUTPUT_PATH + File.separator + "/image/right-bottom.jpg";
 		FileUtil.deleteFiles(outputImageFile);
 		FileUtil.copyFiles(SOURCE_IMAGE_NAME, outputImageFile);
 		Watermark.pressImage(outputImageFile, watermarkImage, "right-bottom", 180F);
 
-		outputImageFile = OUTPUT_PATH + "middle.jpg";
+		outputImageFile = TestCfg.OUTPUT_PATH + File.separator + "/image/middle.jpg";
 		FileUtil.deleteFiles(outputImageFile);
 		FileUtil.copyFiles(SOURCE_IMAGE_NAME, outputImageFile);
 		Watermark.pressImage(outputImageFile, watermarkImage, null, -45F);
@@ -64,9 +65,9 @@ public class WatermarkTest {
 	 */
 	@Test
 	public void testPressText() throws IOException {
-		String imageFileName = OUTPUT_PATH + "pressText.jpg";
+		String imageFileName = TestCfg.OUTPUT_PATH + File.separator + "/image/pressText.jpg";
 		FileUtil.deleteFiles(imageFileName);
-		FileUtil.copyFiles(INPUT_PATH + "cat.jpg", imageFileName);
+		FileUtil.copyFiles(SOURCE_IMAGE_NAME, imageFileName);
 
 		Watermark watermark = new Watermark();
 		watermark.setFont(new Font("黑体", Font.BOLD, 10));

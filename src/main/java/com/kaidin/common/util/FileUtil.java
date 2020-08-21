@@ -43,7 +43,7 @@ public abstract class FileUtil {
 	 * @param startNum
 	 * @return
 	 */
-	public static List<String> readFile(String fileName, int startNum) {
+	public static List<String> readFile(String fileName, int startNum) throws IOException {
 		List<String> result = new ArrayList<>();
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
@@ -54,8 +54,6 @@ public abstract class FileUtil {
 				}
 				lineContent = reader.readLine();
 			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
 		}
 
 		return result;
@@ -66,12 +64,10 @@ public abstract class FileUtil {
 	 * @param fileName
 	 * @param countet
 	 */
-	public static synchronized void write(String fileName, String countet, boolean append) {
+	public static synchronized void write(String fileName, String countet, boolean append) throws IOException {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, append))) {
 			writer.append(countet);
 			writer.flush();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
 		}
 	}
 
@@ -80,14 +76,14 @@ public abstract class FileUtil {
 	 * @param fileName
 	 * @param countet
 	 */
-	public static synchronized void writeAppend(String fileName, String countet) {
+	public static synchronized void writeAppend(String fileName, String countet) throws IOException {
 		write(fileName, countet, true);
 	}
 
 	public static void downloadFile(String urlStr, String absFileName) throws IOException {
 		try (InputStream inputStream = new DataInputStream(new URL(urlStr).openStream());
 		        OutputStream outputStream = new FileOutputStream(new File(absFileName))) {
-			byte[] buffer = new byte[1024];
+			byte[] buffer = new byte[(int) ConstType.fileSize.K_SIZE];
 			int length;
 			while ((length = inputStream.read(buffer)) > 0) {
 				outputStream.write(buffer, 0, length);
