@@ -4,6 +4,8 @@
  */
 package com.kaidin.common.util.encrypt;
 
+import com.kaidin.common.util.constant.ConstType;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -95,7 +97,7 @@ public abstract class EncryptUtil {
 	 */
 	public static String encrypt(File file, EncryptType tncryptType) throws IOException {
 		try (FileInputStream fileInputStream = new FileInputStream(file)) {
-			byte[] buffer = new byte[8192];
+			byte[] buffer = new byte[8 * (int) ConstType.fileSize.K_SIZE];
 			int length;
 			MessageDigest msgDigest = getMessageDigest(tncryptType);
 			while (-1 != (length = fileInputStream.read(buffer))) {
