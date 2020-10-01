@@ -55,7 +55,7 @@ public class FileUtilTest {
 
     @Test
     public void testGetFileSize() {
-        Assert.assertEquals(111227L, FileUtil.getFileSize(TestCfg.INPUT_PATH + "image"));
+        Assert.assertEquals(111227L, FileUtil.getFileSize(TestCfg.INPUT_PATH + "/image"));
     }
 
     @Test

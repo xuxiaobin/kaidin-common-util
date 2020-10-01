@@ -40,7 +40,7 @@ public class NumberUtilTest {
     public void testFormatPercent() {
         Assert.assertNull(NumberUtil.formatPercent(null));
         Assert.assertEquals("12.35%", NumberUtil.formatPercent(0.123456));
-        Assert.assertEquals("12.34%", NumberUtil.formatPercent(1.123446));
+        Assert.assertEquals("112.34%", NumberUtil.formatPercent(1.123446));
     }
 
     @Test

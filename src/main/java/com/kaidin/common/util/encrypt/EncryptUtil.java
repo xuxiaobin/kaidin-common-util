@@ -117,6 +117,15 @@ public abstract class EncryptUtil {
 	}
 
 	/**
+	 * 计算指定字节数组的md5值
+	 * @param content
+	 * @return
+	 */
+	public static String md5(byte[] content) {
+		return encrypt(content, EncryptType.MD5);
+	}
+
+	/**
 	 * 计算指定字符串的md5值
 	 * @param file
 	 * @return

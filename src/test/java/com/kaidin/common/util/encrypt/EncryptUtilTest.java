@@ -24,8 +24,13 @@ public class EncryptUtilTest extends Md5UtilTest {
 	private static File   FILE         = new File(EncryptUtilTest.class.getClassLoader().getResource("input/md5TestFile.txt").getFile());
 
 	@Test
-	public void testMd5() {
-		super.testMd5();
+	public void testStrMd5() {
+		super.testStrMd5();
+	}
+
+	@Test
+	public void testByteArryMd5() {
+		super.testByteArryMd5();
 	}
 
 	@Test

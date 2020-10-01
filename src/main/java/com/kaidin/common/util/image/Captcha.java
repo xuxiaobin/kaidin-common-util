@@ -16,6 +16,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import com.kaidin.common.util.constant.ConstType;
+import com.kaidin.common.util.random.RandomUtil;
 
 /**
  * 图片验证码生成
@@ -75,10 +76,14 @@ public class Captcha extends BaseImage {
 		int imgWidth = Double.valueOf(fontSize * (result.length * CODE_WIDTH + (1 - CODE_WIDTH))).intValue();
 		BufferedImage buffImg = new BufferedImage(imgWidth, fontSize, BufferedImage.TYPE_INT_RGB);
 		Graphics2D graphics = initGraphics(buffImg);
-		drawDisturbLine(buffImg); // 画干扰线
-		drawCurve(buffImg); // 添加干扰曲线
-		drawCode(graphics, result); // 画字符
-		buffImg = twistImage(buffImg); // 扭曲图片
+		// 画干扰线
+		drawDisturbLine(buffImg);
+		// 添加干扰曲线
+		drawCurve(buffImg);
+		// 画字符
+		drawCode(graphics, result);
+		// 扭曲图片
+		buffImg = twistImage(buffImg);
 		//		drawCurve(graphics);	// 添加干扰曲线
 
 		ImageIO.write(buffImg, "PNG", output);
@@ -117,9 +122,12 @@ public class Captcha extends BaseImage {
 	 * @param codeArray
 	 */
 	private void drawCode(Graphics2D graphics, char[] codeArray) {
-		int codeWidth = Double.valueOf(fontSize * CODE_WIDTH).intValue(); // 字符的宽度
-		int codeX = Double.valueOf(codeWidth * (1 - CODE_WIDTH)).intValue(); // 开始画的横坐标
-		int codeY = Double.valueOf(fontSize * CODE_WIDTH).intValue(); // 开始画的纵坐标
+		// 字符的宽度
+		int codeWidth = Double.valueOf(fontSize * CODE_WIDTH).intValue();
+		// 开始画的横坐标
+		int codeX = Double.valueOf(codeWidth * (1 - CODE_WIDTH)).intValue();
+		// 开始画的纵坐标
+		int codeY = Double.valueOf(fontSize * CODE_WIDTH).intValue();
 //		System.out.println("(" + codeX + "," + codeY + ")");
 		graphics.setFont(font);
 		for (int index = 0; index < codeArray.length; index++) {
@@ -138,9 +146,12 @@ public class Captcha extends BaseImage {
 	 * @param buffImg
 	 */
 	private void drawDisturbLine(BufferedImage buffImg) {
-		int xOffset = 20, yOffset = 10; // 两个点之间的偏移量
-		int x1, y1; // 第一个点的坐标
-		int x2, y2; // 第二个点的坐标
+		// 两个点之间的偏移量
+		int xOffset = 20, yOffset = 10;
+		// 第一个点的坐标
+		int x1, y1;
+		// 第二个点的坐标
+		int x2, y2;
 		Graphics2D graphics = buffImg.createGraphics();
 		Random random = new Random(System.currentTimeMillis());
 		for (int i = 0; i < MIN_CODE_COUNT * 3; i++) {
@@ -162,11 +173,15 @@ public class Captcha extends BaseImage {
 		graphics.setColor(createColor());
 
 		Random random = new Random(System.currentTimeMillis());
-		double amplitude = random.nextFloat() * 10 + 4; // 波形的幅度倍数，越大扭曲的程序越高，一般为3
-		double phase = random.nextFloat() * 2 * Math.PI; // 波形的起始相位，取值区间（0-2＊PI）
+		// 波形的幅度倍数，越大扭曲的程序越高，一般为3
+		double amplitude = random.nextFloat() * 10 + 4;
+		// 波形的起始相位，取值区间（0-2＊PI）
+		double phase = random.nextFloat() * 2 * Math.PI;
 		for (int x = 0; x < buffImg.getWidth(); x++) {
-			double dx = 2 * Math.PI * x / buffImg.getWidth() + phase; // 将y坐标映射到2PI上，加上相位
-			int offset = (int) (Math.sin(dx) * amplitude) + 9; // 正弦函数乘以振幅
+			// 将y坐标映射到2PI上，加上相位
+			double dx = 2 * Math.PI * x / buffImg.getWidth() + phase;
+			// 正弦函数乘以振幅
+			int offset = (int) (Math.sin(dx) * amplitude) + 9;
 			//画一小段竖线
 			if (0 < offset && offset < fontSize) {
 				graphics.drawLine(x, offset, x, offset + 2);
@@ -233,11 +248,16 @@ public class Captcha extends BaseImage {
 		graphics.fillRect(0, 0, imgWidth, imgHeight);
 
 		Random random = new Random(System.currentTimeMillis());
-		double amplitude = random.nextInt(3) + 3; // 波形的幅度倍数，越大扭曲的程序越高，一般为3
-		double phase = random.nextInt(6); // 波形的起始相位，取值区间（0-2＊PI）
+
+		// 波形的幅度倍数，越大扭曲的程序越高，一般为3
+		double amplitude = random.nextInt(3) + 3;
+		// 波形的起始相位，取值区间（0-2＊PI）
+		double phase = random.nextInt(6);
 		for (int y = 0; y < imgHeight; y++) {
-			double dy = 2 * Math.PI * y / imgHeight + phase; // 将y坐标映射到2PI上，加上相位
-			int offset = (int) (Math.sin(dy) * amplitude); // 正弦函数乘以振幅
+			// 将y坐标映射到2PI上，加上相位
+			double dy = 2 * Math.PI * y / imgHeight + phase;
+			// 正弦函数乘以振幅
+			int offset = (int) (Math.sin(dy) * amplitude);
 			for (int x1 = 0; x1 < imgWidth; x1++) {
 				int x2 = x1 + offset;
 				if (0 <= x2 && x2 < imgWidth) {

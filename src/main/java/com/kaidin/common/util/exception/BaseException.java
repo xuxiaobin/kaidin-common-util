@@ -9,7 +9,7 @@ package com.kaidin.common.util.exception;
  * @author kaidin@foxmail.com
  * @date 2016-5-17下午01:51:48
  */
-public class BaseException extends RuntimeException {
+public class BaseException extends RuntimeException implements IExceptionCode {
 	private static final long serialVersionUID = -232294070953752792L;
 	protected String          errCode;
 	protected String          errMsg;
