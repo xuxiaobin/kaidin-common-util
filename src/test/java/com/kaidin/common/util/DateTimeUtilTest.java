@@ -12,10 +12,10 @@ import java.util.Date;
  * @date 2020-08-19 17:12
  */
 public class DateTimeUtilTest {
-    private String pattern = "yyyy-MM-dd HH:mm";
-    private Date date = new Date(2020 - 1900, 7, 19, 18, 23);
-    private String dateStr = "2020-08-19 18:23";
-    private String fullDateStr = "2020-08-19 18:23:00";
+    private final String pattern = "yyyy-MM-dd HH:mm";
+    private final Date date = new Date(2020 - 1900, 7, 19, 18, 23);
+    private final String dateStr = "2020-08-19 18:23";
+    private final String fullDateStr = "2020-08-19 18:23:00";
 
     @Test
     public void testGetStringToDateWithPattern() throws ParseException {

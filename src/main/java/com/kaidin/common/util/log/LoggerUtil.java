@@ -1,5 +1,5 @@
 /**
- * Kaidin.com Inc.
+ * kaidin.com Inc.
  * Copyright (c) 2008-2018 All Rights Reserved.
  */
 package com.kaidin.common.util.log;
@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class LoggerUtil {
 	/* 摘要日志，配合日志配置文件输出 */
-	private static Logger DIGEST_LOGGER = LoggerFactory.getLogger("digestLog");
+	private static final Logger DIGEST_LOGGER = LoggerFactory.getLogger("digestLog");
 
 	/**
 	 * 摘要日志输出，使用之前请配置

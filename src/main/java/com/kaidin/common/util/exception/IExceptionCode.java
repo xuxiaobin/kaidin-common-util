@@ -1,5 +1,5 @@
 /**
- * Kaidin.com Inc.
+ * kaidin.com Inc.
  * Copyright (c) 200import java.io.Serializable;
 */
 package com.kaidin.common.util.exception;

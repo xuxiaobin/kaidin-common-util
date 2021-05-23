@@ -12,10 +12,10 @@ import java.io.IOException;
  * @date 2020-08-19 16:49
  */
 public class Md5UtilTest {
-    private static String STR_12345    = "123456";
-    private static String STR_ADMIN123 = "admin123";
-    private static String STR_NULL     = null;
-    private static File FILE         = new File(Md5UtilTest.class.getClassLoader().getResource("input/md5TestFile.txt").getFile());
+    private static final String STR_12345    = "123456";
+    private static final String STR_ADMIN123 = "admin123";
+    private static final String STR_NULL     = null;
+    private static final File FILE         = new File(Md5UtilTest.class.getClassLoader().getResource("input/md5TestFile.txt").getFile());
 
     @Test
     public void testStrMd5() {

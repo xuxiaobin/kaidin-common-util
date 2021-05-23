@@ -1,5 +1,5 @@
 /**
- * Kaidin.com Inc.
+ * kaidin.com Inc.
  * Copyright (c) 2008-2018 All Rights Reserved.
  */
 package com.kaidin.common.util.query;
@@ -19,7 +19,7 @@ import com.kaidin.common.util.ToString;
  */
 public class SortRequest extends ToString {
 	private static final long   serialVersionUID = -4902827484393351934L;
-	private Map<String, String> container        = new LinkedHashMap<>();
+	private final Map<String, String> container        = new LinkedHashMap<>();
 
 	public void addSort(String column) {
 		container.put(column, "asc");
