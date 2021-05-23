@@ -49,7 +49,7 @@ public abstract class DbUtil {
 	 */
 	public static Connection getConnection(boolean autoCommit) throws InstantiationException, IllegalAccessException,
 	        ClassNotFoundException, SQLException {
-		Connection result = null;
+		Connection result;
 
 		Class.forName(JDBC_DRIVER_CLASS_NAME).newInstance();
 		result = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
@@ -71,7 +71,6 @@ public abstract class DbUtil {
 		if (null != rs && !rs.isClosed()) {
 			try {
 				rs.close();
-				rs = null;
 			} catch (SQLException e) {
 				error = e;
 			}
@@ -80,7 +79,6 @@ public abstract class DbUtil {
 		if (null != ps && !ps.isClosed()) {
 			try {
 				ps.close();
-				ps = null;
 			} catch (SQLException e) {
 				error = e;
 			}
@@ -89,7 +87,6 @@ public abstract class DbUtil {
 		if (null != conn && !conn.isClosed()) {
 			try {
 				conn.close();
-				conn = null;
 			} catch (SQLException e) {
 				error = e;
 			}

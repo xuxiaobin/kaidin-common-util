@@ -16,7 +16,6 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import com.kaidin.common.util.constant.ConstType;
-import com.kaidin.common.util.random.RandomUtil;
 
 /**
  * 图片验证码生成
@@ -227,9 +226,7 @@ public class Captcha extends BaseImage {
 			b = random.nextInt(200);
 		}
 
-		Color result = new Color(r, g, b);
-
-		return result;
+		return new Color(r, g, b);
 	}
 
 	/**

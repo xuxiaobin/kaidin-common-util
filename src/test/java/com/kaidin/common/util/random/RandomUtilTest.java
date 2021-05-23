@@ -4,11 +4,10 @@
  */
 package com.kaidin.common.util.random;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import com.kaidin.common.util.random.RandomUtil;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class RandomUtilTest {
 
@@ -31,7 +30,7 @@ public class RandomUtilTest {
 	@Test
 	public void testNextBase36Code() {
 		for (int i = 0; i < 1000; i++) {
-			assertTrue(RandomUtil.nextBase36Code().length() == 11);
+            assertEquals(11, RandomUtil.nextBase36Code().length());
 //			assertTrue(!RandomUtil.nextBase36Code().equals(RandomUtil.nextBase36Code()));
 		}
 	}
@@ -39,8 +38,17 @@ public class RandomUtilTest {
 	@Test
 	public void testNextBase62Code() {
 		for (int i = 0; i < 1000; i++) {
-			assertTrue(RandomUtil.nextBase62Code().length() == 10);
+            assertEquals(10, RandomUtil.nextBase62Code().length());
 //			assertTrue(!RandomUtil.nextBase62Code().equals(RandomUtil.nextBase36Code()));
+		}
+	}
+
+	@Test
+	public void testNextBase64Code() {
+		for (int i = 0; i < 1000; i++) {
+//			assertTrue(RandomUtil.nextBase64Code().length() == 10);
+			assertNotSame(RandomUtil.nextBase64Code(), RandomUtil.nextBase64Code());
+//			System.out.println(RandomUtil.nextBase64Code());
 		}
 	}
 }

@@ -61,7 +61,7 @@ public class FtpUtil {
 	 * @throws Exception
 	 */
 	public boolean openServer() throws IOException {
-		boolean isSuccess = false;
+		boolean isSuccess;
 
 		ftpClient = new FTPClient();
 		ftpClient.connect(hostname, port);

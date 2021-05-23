@@ -132,7 +132,7 @@ public abstract class IpUtil {
 			result += Long.parseLong(ips[3]);
 		}
 		if ("0".equals(ipStr)) {
-			result = 0l;
+			result = 0L;
 		}
 
 		return result;
@@ -150,14 +150,14 @@ public abstract class IpUtil {
 	}
 
 	public static String asStringIp(int ipInt) {
-		StringBuffer strBuffer = new StringBuffer(15);
+		StringBuilder strBuilder = new StringBuilder(15);
 
-		strBuffer.append(ipInt >> 24 & 0xff); // 最高位，无符号右移
-		strBuffer.append(".").append((ipInt >> 16) & 0xff); // 次高位
-		strBuffer.append(".").append((ipInt >> 8) & 0xff); // 次低位
-		strBuffer.append(".").append(ipInt & 0xff); // 最低位
+		strBuilder.append(ipInt >> 24 & 0xff); // 最高位，无符号右移
+		strBuilder.append(".").append((ipInt >> 16) & 0xff); // 次高位
+		strBuilder.append(".").append((ipInt >> 8) & 0xff); // 次低位
+		strBuilder.append(".").append(ipInt & 0xff); // 最低位
 
-		return strBuffer.toString();
+		return strBuilder.toString();
 	}
 
 	/**

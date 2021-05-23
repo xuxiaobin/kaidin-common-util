@@ -193,7 +193,7 @@ public class AssertUtilTest {
         }
     }
 
-    class TestException implements IExceptionCode {
+    static class TestException implements IExceptionCode {
 
         @Override
         public String getErrCode() {

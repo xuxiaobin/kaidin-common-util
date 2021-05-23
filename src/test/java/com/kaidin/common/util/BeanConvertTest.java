@@ -14,8 +14,8 @@ import org.junit.Test;
 import com.kaidin.common.util.help.Student;
 
 public class BeanConvertTest {
-	private static String[] PROPERTIES = new String[] { "name", "age", "studentNumber" };
-	private static Object[] VALUES     = new Object[] { "张三", 12, "1234567890" };
+	private static final String[] PROPERTIES = new String[] { "name", "age", "studentNumber" };
+	private static final Object[] VALUES     = new Object[] { "张三", 12, "1234567890" };
 
 	@Test
 	public void testConvertTStringArrayObjectArray() throws Exception {

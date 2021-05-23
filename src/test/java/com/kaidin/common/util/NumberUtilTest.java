@@ -3,8 +3,6 @@ package com.kaidin.common.util;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * @author xiaobin
  * @date 2020-08-21 10:12

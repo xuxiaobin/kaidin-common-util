@@ -4,15 +4,14 @@
  */
 package com.kaidin.common.util.net;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.net.SocketException;
 import java.util.Arrays;
 
 import org.junit.Test;
 
 import com.kaidin.common.util.constant.ConstType;
+
+import static org.junit.Assert.*;
 
 public class IpUtilTest {
 	public static void main(String[] args) {
@@ -31,18 +30,18 @@ public class IpUtilTest {
 
 	@Test
 	public void testIsIpAddr() {
-		assertEquals(true, IpUtil.isIpAddr("0.0.0.0"));
-		assertEquals(true, IpUtil.isIpAddr("255.255.255.255"));
-		assertEquals(false, IpUtil.isIpAddr("256.255.255.255"));
-		assertEquals(false, IpUtil.isIpAddr("255.255.255."));
+        assertTrue(IpUtil.isIpAddr("0.0.0.0"));
+		assertTrue(IpUtil.isIpAddr("255.255.255.255"));
+		assertFalse(IpUtil.isIpAddr("256.255.255.255"));
+		assertFalse(IpUtil.isIpAddr("255.255.255."));
 	}
 
 	@Test
 	public void testAsByteIp() {
-		assertTrue(Arrays.equals(new byte[] { 0, 0, 0, 0 }, IpUtil.asByteIp("0.0.0.0")));
-		assertTrue(Arrays.equals(new byte[] { -1, -1, -1, -1 }, IpUtil.asByteIp("255.255.255.255")));
-		assertTrue(Arrays.equals(new byte[] { 127, 0, 5, 1 }, IpUtil.asByteIp("127.0.5.1")));
-		assertTrue(Arrays.equals(new byte[] { 127, 0, -1, 1 }, IpUtil.asByteIp("127.0.255.1")));
+		assertArrayEquals(new byte[]{0, 0, 0, 0}, IpUtil.asByteIp("0.0.0.0"));
+		assertArrayEquals(new byte[]{-1, -1, -1, -1}, IpUtil.asByteIp("255.255.255.255"));
+		assertArrayEquals(new byte[]{127, 0, 5, 1}, IpUtil.asByteIp("127.0.5.1"));
+		assertArrayEquals(new byte[]{127, 0, -1, 1}, IpUtil.asByteIp("127.0.255.1"));
 	}
 
 	@Test

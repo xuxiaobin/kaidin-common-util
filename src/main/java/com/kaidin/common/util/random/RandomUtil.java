@@ -4,6 +4,7 @@
  */
 package com.kaidin.common.util.random;
 
+import java.util.Base64;
 import java.util.Random;
 
 import com.kaidin.common.util.constant.ConstType;
@@ -17,6 +18,7 @@ import com.kaidin.common.util.constant.ConstType;
 public abstract class RandomUtil {
 	private static final char[] CHAR_ARRAY_36 = ConstType.charSet.BASE36.toCharArray();
 	private static final char[] CHAR_ARRAY_62 = ConstType.charSet.BASE62.toCharArray();
+	private static final Base64.Encoder ENCODER = Base64.getUrlEncoder();
 
 	/**
 	 * 随机一个整数[beginValue, endValue]
@@ -87,5 +89,23 @@ public abstract class RandomUtil {
 		}
 
 		return new String(charArry);
+	}
+
+	/**
+	 * 随机长度12的字符串，每毫秒可以随机不容易重复
+	 * 需要二进制72bit
+	 * 8bit随机数+8bit随机数+42bit当前时间毫秒数
+	 * @return
+	 */
+	public static String nextBase64Code() {
+		byte[] byteArray = new byte[9];
+		long currentTimes = System.currentTimeMillis();
+		for (int i = 0; i < 8; i++) {
+			byteArray[i] = (byte)(currentTimes & 0xFF);
+			currentTimes >>= 8;
+		}
+		byteArray[8] = (byte)(new Random().nextInt() & 0xFF);
+
+		return ENCODER.encodeToString(byteArray);
 	}
 }
