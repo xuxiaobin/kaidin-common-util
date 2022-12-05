@@ -33,7 +33,7 @@
 			<!-- 主要是用到了apache的org.apache.commons.net.ftp.FTPClient类 -->
 			<groupId>commons-net</groupId>
 			<artifactId>commons-net</artifactId>
-			<version>3.2</version>
+			<version>3.9.0</version>
 		</dependency>
 		<dependency>
 			<!-- 主要是用到了apache的org.apache.commons.beanutils.PropertyUtils类 -->
