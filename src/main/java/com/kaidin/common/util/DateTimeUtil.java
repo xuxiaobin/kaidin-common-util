@@ -24,6 +24,7 @@ public abstract class DateTimeUtil {
 	/** 单位之间的进率 */
 	private static final long[]   DECIMALISM_ARRAY = new long[] { 1000, 60, 60, 24, Long.MAX_VALUE };
 
+	private static final ThreadLocal<DateFormat> TLDF = ThreadLocal.withInitial(() -> new SimpleDateFormat(DEFALT_PATTERN));
 	/**
 	 * 把字符串值格式化成Date类型
 	 * @param dateStr
@@ -45,7 +46,7 @@ public abstract class DateTimeUtil {
 	 * @throws ParseException
 	 */
 	public static Date getStringToDate(String dateStr) throws ParseException {
-		return getStringToDate(dateStr, DEFALT_PATTERN);
+		return TLDF.get().parse(dateStr);
 	}
 
 	/**
@@ -69,14 +70,14 @@ public abstract class DateTimeUtil {
 	 * @return
 	 */
 	public static String getDateToString(Date source) {
-		return getDateToString(source, DEFALT_PATTERN);
+		return TLDF.get().format(source);
 	}
 
 	/**
 	 * 获取当前时间的yyyy-MM-dd HH:mm:ss字符串形式
 	 */
 	public static String getDateToString() {
-		return getDateToString(new Date(), DEFALT_PATTERN);
+		return TLDF.get().format(new Date());
 	}
 
 	/**
